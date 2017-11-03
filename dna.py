@@ -11,7 +11,7 @@ class dna(num):
             c = 46    
         return chr(c)
 
-    def __init__(num=10):
+    def __init__(self, num=10):
         self.num = num
         self.genes = []
         self.fitness = 0
@@ -21,7 +21,7 @@ class dna(num):
     def get_phrase(self):
         return ''.join(this.genes)
 
-    def calcFitness(self, target):
+    def calc_fitness(self, target):
         score = 0
         for i in range(0, len(self.genes)):
             if self.genes[i] = target[i]:
@@ -45,4 +45,3 @@ class dna(num):
         for i in range(0, len(self.genes)):
             if randint(1) < mutation_rate:
                 this.genes[i] = new_char(self)
-            
