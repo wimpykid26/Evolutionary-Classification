@@ -3,7 +3,7 @@ from math import floor
 
 class dna(num):
     
-    def newChar(self):
+    def new_char(self):
         c = floor(randint(63, 122))
         if c is 63:
             c = 32
@@ -18,7 +18,7 @@ class dna(num):
         for i in range (0, num):
             self.genes.append(self.newChar())
         
-    def getPhrase(self):
+    def get_phrase(self):
         return ''.join(this.genes)
 
     def calcFitness(self, target):
@@ -34,4 +34,15 @@ class dna(num):
         midpoint = floor(randint(len(self.genes)))
 
         for i in range(0, len(self.genes)):
+            if i > midpoint:
+                child.genes[i] = self.genes[i]
+            else:
+                child.genes = partner.genes[i]
+
+        return child
+
+    def mutate(self, mutation_rate):
+        for i in range(0, len(self.genes)):
+            if randint(1) < mutation_rate:
+                this.genes[i] = new_char(self)
             
