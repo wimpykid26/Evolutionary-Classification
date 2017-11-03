@@ -1,5 +1,6 @@
 from dna import dna
 from numpy import interp
+from math import floor, randint
 class Population(p, m, num):
     def __init__(self, p, m, num):
         self.population = []
@@ -34,6 +35,15 @@ class Population(p, m, num):
                 self.mating_pool.append(self.population[i])
 
         
-    
-    
+    def generate(self):
+        for i in range(0, len(self.population)):
+            a = floor(randint(len(self.mating_pool)))
+            b = floor(randint(len(self.mating_pool)))
+            partner_a = self.mating_pool[a]
+            partner_b = self.mating_pool[b]
+            child = partner_a.crossover(partner_b)
+            child.mutate(self.mutation_rate)
+            self.population[i] = child
+        
+        self.generations++
         
