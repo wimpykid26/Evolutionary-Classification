@@ -1,10 +1,10 @@
-from random import randint
+from random import randint, uniform
 from math import floor
 
-class dna(num):
+class dna():
     
     def new_char(self):
-        c = floor(randint(63, 122))
+        c = int(floor(randint(63, 122)))
         if c is 63:
             c = 32
         if c is 64:
@@ -16,7 +16,7 @@ class dna(num):
         self.genes = []
         self.fitness = 0
         for i in range (0, num):
-            self.genes.append(self.newChar())
+            self.genes.append(self.new_char())
         
     def get_phrase(self):
         return ''.join(this.genes)
@@ -24,24 +24,24 @@ class dna(num):
     def calc_fitness(self, target):
         score = 0
         for i in range(0, len(self.genes)):
-            if self.genes[i] = target[i]:
-                score++
+            if self.genes[i] == target[i]:
+                score = score + 1
             
         self.fitness = score/len(target)
     
     def crossover(self, partner):
         child = dna(len(self.genes))
-        midpoint = floor(randint(len(self.genes)))
+        midpoint = int(floor(randint(0, len(self.genes))))
 
         for i in range(0, len(self.genes)):
             if i > midpoint:
                 child.genes[i] = self.genes[i]
             else:
-                child.genes = partner.genes[i]
+                child.genes[i] = partner.genes[i]
 
         return child
 
     def mutate(self, mutation_rate):
         for i in range(0, len(self.genes)):
-            if randint(1) < mutation_rate:
-                this.genes[i] = new_char(self)
+            if uniform(0, 1) < mutation_rate:
+                self.genes[i] = self.new_char()

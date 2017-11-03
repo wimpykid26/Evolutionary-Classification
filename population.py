@@ -1,7 +1,15 @@
 from dna import dna
 from numpy import interp
-from math import floor, randint
-class Population(p, m, num):
+from math import floor
+from random import randint
+
+
+class Population():
+
+    def calc_fitness_population(self):
+        for i in range(0, len(self.population)):
+            self.population[i].calc_fitness(self.target)
+
     def __init__(self, p, m, num):
         self.population = []
         self.mating_pool = []
@@ -13,14 +21,9 @@ class Population(p, m, num):
         self.best = ''
 
         for i in range(0, num):
-            self.population.append(dna(len(self.target))
+            self.population.append(dna(len(self.target)))
         
-        self.calc_fitness()
-
-    
-    def calc_fitness(self):
-        for i in range(0, len(self.population)):
-            self.population[i].calc_fitness(target)
+        self.calc_fitness_population()
     
     def natural_selection(self):
         max_fitness = 0
@@ -30,22 +33,22 @@ class Population(p, m, num):
 
         for i in range(0, len(self.population)):
             fitness = interp(self.population[i].fitness, [0, max_fitness], [0, 1])
-            n = floor(fitness * 100)
+            n = int(floor(fitness * 100))
             for j in range(0, n):
                 self.mating_pool.append(self.population[i])
 
         
     def generate(self):
         for i in range(0, len(self.population)):
-            a = floor(randint(len(self.mating_pool)))
-            b = floor(randint(len(self.mating_pool)))
+            a = int(floor(randint(0, len(self.mating_pool))))
+            b = int(floor(randint(0, len(self.mating_pool))))
             partner_a = self.mating_pool[a]
             partner_b = self.mating_pool[b]
             child = partner_a.crossover(partner_b)
             child.mutate(self.mutation_rate)
             self.population[i] = child
         
-        self.generations++
+        self.generations = self.generations + 1
     
     def get_best(self):
         return self.best
@@ -69,12 +72,12 @@ class Population(p, m, num):
     def get_generations(self):
         return self.get_generations
 
-    def average_fitness(self):
+    def get_average_fitness(self):
         total = 0
         for i in range(0, len(self.population)):
             total += self.population[i].fitness
         
-        return floor(float(total/len(self.population))
+        return floor(float(total/len(self.population)))
 
     def all_phrases(self):
         everything = ''
