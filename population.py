@@ -46,4 +46,40 @@ class Population(p, m, num):
             self.population[i] = child
         
         self.generations++
+    
+    def get_best(self):
+        return self.best
+
+    def evaluate(self):
+        world_record = 0.0
+        index = 0
+        for i in range(0, len(self.population)):
+            if self.population[i].fitness > world_record:
+                world_record = self.population[i].fitness
+                index = i
+            
+        self.best = self.population[i].fitness
+        if world_record == self.perfect_score:
+            self.finished = true
+
+    
+    def is_finished(self):
+        return self.finished
+
+    def get_generations(self):
+        return self.get_generations
+
+    def average_fitness(self):
+        total = 0
+        for i in range(0, len(self.population)):
+            total += self.population[i].fitness
         
+        return floor(float(total/len(self.population))
+
+    def all_phrases(self):
+        everything = ''
+        display_limit = min(len(self.population), 50)
+        for i in range(0, display_limit):
+            everything += self.population[i].get_phrase() + "\n"
+
+        return everything
